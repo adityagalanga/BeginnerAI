@@ -27,7 +27,7 @@ public class SimpleAICar : MonoBehaviour {
 		this.transform.rotation = Quaternion.Slerp(this.transform.rotation, 
 												Quaternion.LookRotation(direction), 
 												Time.deltaTime*rotSpeed);
-		if(Vector3.Angle(goal.forward,this.transform.forward) > brakeAngle)
+		if(Vector3.Angle(goal.forward,this.transform.forward) > brakeAngle && speed > 10)
 		{
 			speed = Mathf.Clamp(speed - (acceleration * Time.deltaTime), minSpeed, maxSpeed);
         }
