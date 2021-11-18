@@ -7,6 +7,8 @@ public class MoveLocal : MonoBehaviour
     public Transform goal;
     float speed = 0.5f;
     float accuracy = 1.0f;
+    float rotSpeed = 0.5f;
+
     void Start()
     {
         
@@ -16,7 +18,10 @@ public class MoveLocal : MonoBehaviour
     void Update()
     {
         Vector3 lookatGoal = new Vector3(goal.position.x, this.transform.position.y, goal.position.z);
-        this.transform.LookAt(lookatGoal);
+
+        Vector3 direction = lookatGoal - this.transform.position;
+
+        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction), Time.deltaTime * rotSpeed);
         if(Vector3.Distance(transform.position,lookatGoal) > accuracy)
             this.transform.Translate(0, 0, speed * Time.deltaTime);
     }
