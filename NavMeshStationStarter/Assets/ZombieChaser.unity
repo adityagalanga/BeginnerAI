@@ -24273,7 +24273,7 @@ PrefabInstance:
     - target: {fileID: 9500000, guid: 69322fb4af06145cba2a38cd779785c0, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: b1b3b3b8a607341e9a07a5d245ee94b4, type: 2}
+      objectReference: {fileID: 9100000, guid: 52b4ee10cfd8e441791020ed1c4c8245, type: 2}
     - target: {fileID: 9500000, guid: 69322fb4af06145cba2a38cd779785c0, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0
@@ -24296,7 +24296,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 1
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -24318,6 +24318,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d629391f928513146bbab42f8682ed81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &794893084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794893079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66fa8e4f2f6284241a0134cab40bcba0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &808568462
