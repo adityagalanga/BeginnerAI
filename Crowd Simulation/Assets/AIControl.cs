@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AIControl : MonoBehaviour {
+public class AIControl : MonoBehaviour
+{
 
 	GameObject[] goalLocations;
 	NavMeshAgent agent;
@@ -14,7 +15,7 @@ public class AIControl : MonoBehaviour {
 
 	void ResetAgent()
 	{
-		speedMult = Random.Range(0.1f,1.5f);
+		speedMult = Random.Range(0.1f, 1.5f);
 		agent.speed = 2 * speedMult;
 		agent.angularSpeed = 120;
 		anim.SetFloat("speedMult", speedMult);
@@ -24,42 +25,53 @@ public class AIControl : MonoBehaviour {
 
 	public void DetectNewObstacle(Vector3 position)
 	{
-		if(Vector3.Distance(position, this.transform.position) < detectionRadius)
+		if (Vector3.Distance(position, this.transform.position) < detectionRadius)
 		{
 			Vector3 fleeDirection = (this.transform.position - position).normalized;
 			Vector3 newgoal = this.transform.position + fleeDirection * fleeRadius;
 
 			NavMeshPath path = new NavMeshPath();
-        	agent.CalculatePath(newgoal, path);
+			agent.CalculatePath(newgoal, path);
 
-			if(path.status != NavMeshPathStatus.PathInvalid)
+			if (path.status != NavMeshPathStatus.PathInvalid)
 			{
 				agent.SetDestination(path.corners[path.corners.Length - 1]);
 				anim.SetTrigger("isRunning");
 				agent.speed = 10;
 				agent.angularSpeed = 500;
 			}
-		
+
 		}
 	}
 
 
 	// Use this for initialization
-	void Start () {
+	void Start()
+	{
 		goalLocations = GameObject.FindGameObjectsWithTag("goal");
 		agent = this.GetComponent<NavMeshAgent>();
-		agent.SetDestination(goalLocations[Random.Range(0,goalLocations.Length)].transform.position);
 		anim = this.GetComponent<Animator>();
-		anim.SetFloat("wOffset", Random.Range(0,1));
-		ResetAgent();
+		anim.SetFloat("wOffset", Random.Range(0, 1)); 
+		PickLocation();
 	}
-	
+
+	bool isTrigger = true;
+	void PickLocation()
+	{
+		ResetAgent();
+		agent.SetDestination(goalLocations[Random.Range(0, goalLocations.Length)].transform.position);
+		isTrigger = false;
+	}
+
 	// Update is called once per frame
-	void Update () {
-		if(agent.remainingDistance < 1)
+	void Update()
+	{
+		if (agent.remainingDistance < 1 && !isTrigger)
 		{
-			ResetAgent();
-			agent.SetDestination(goalLocations[Random.Range(0,goalLocations.Length)].transform.position);
-		}		
+			isTrigger = true;
+			anim.SetTrigger("isIdle");
+			//pick new location after somewhere between 5 and 10 seconds.
+			Invoke("PickLocation", Random.Range(5f, 10f));
+		}
 	}
 }
