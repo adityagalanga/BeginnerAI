@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class NPCBaseFSM : StateMachineBehaviour
 {
+    public NavMeshAgent agent;
     public GameObject NPC;
     public GameObject opponent;
     public float speed = 2.0f;
@@ -14,5 +16,6 @@ public class NPCBaseFSM : StateMachineBehaviour
     {
         NPC = animator.gameObject;
         opponent = NPC.GetComponent<TankAI>().player;
+        agent = NPC.GetComponent<NavMeshAgent>();
     }
 }
