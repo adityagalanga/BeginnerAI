@@ -1,0 +1,14 @@
+tree("Root")
+	sequence
+		PickDestination(-100,-100)
+		MoveToDestination
+		Wait(0.5)
+		PickDestination(100,100)
+		MoveToDestination
+		Wait(0.5)
+		PickDestination(-100,-100)
+		MoveToDestination
+		Wait(0.5)
+		PickDestination(100,100)
+		MoveToDestination
+		Wait(0.5)

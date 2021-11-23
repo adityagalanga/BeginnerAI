@@ -1,0 +1,7 @@
+tree("Root")
+	sequence
+		SeePlayer
+		TargetPlayer
+		LookAtPlayer
+		Wait(0.5)
+		Fire
