@@ -7,11 +7,15 @@ public class Fluck : MonoBehaviour
     public FlockManager myManager;
     float speed;
     bool turning = false;
+    Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
         speed = Random.Range(myManager.minSpeed, myManager.maxSpeed);
+        anim = this.GetComponent<Animator>();
+        anim.SetFloat("wOffset", Random.Range(0.0f, 1.0f));
+        anim.SetFloat("speedMult", speed);
     }
 
     // Update is called once per frame
@@ -48,7 +52,8 @@ public class Fluck : MonoBehaviour
             if (Random.Range(0, 100) < 20)
                 ApplyRules();
         }
-        
+
+        anim.SetFloat("speedMult", speed);
         transform.Translate(0, 0, Time.deltaTime * speed);
     }
 
